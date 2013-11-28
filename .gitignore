@@ -154,3 +154,5 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
+/Problema 2/nbproject/private/
+/Problema 2/dist/
