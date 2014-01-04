@@ -28,14 +28,20 @@ class Inversiune
 		i=x; j=middle+1; p=0;
 		divetimp(x, middle);
 		divetimp(j, y);
-		while(i<middle || j<y)
+		while(i<=middle || j<=y)
 		{
-			if(array[i] > 2*array[j] && j<y || i>middle)
+			System.out.print("\n     acum sunt in while"
+				+" cu i=" +i+ " si j="+j+" x="+x+" y="+y);
+			if((array[i] > 2*array[j] && j<=y) || i>middle)
+			//if(array[i] > 2*array[j])
 			{
 				hashInv.put(array[i], array[j]);
 				System.out.print("\nAm gasit si adaugat inversiunea"+
 					array[i] + ">2*" +array[j]);
 			}
+			//daca cicleaza in draci baga iterare aici
+			i++;
+			j++;
 		}
 	}
 
@@ -60,7 +66,7 @@ class Inversiune
 				i++;
 			}
 
-			divetimp(0, nArrayLimit);
+			divetimp(0, nArrayLimit-1);
 			printResults();
 		}
 		catch (InputMismatchException e) 
