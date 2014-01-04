@@ -5,12 +5,44 @@ class Inversiune
 {
 	static int nArrayLimit;
 	static int[] array;
+	static int i, j, p;
+	static HashMap<Integer, Integer> hashInv;
 
 	public static void init()
 	{
 		array = new int[nArrayLimit];
+		hashInv = new HashMap<Integer, Integer>();
 		System.out.print("\nAm initializat array-ul, cu " + 
 			nArrayLimit + " campuri!");
+	}
+
+	public static void divetimp(int x, int y)
+	{
+		if(x!=y)
+		{
+			System.out.print("\nAm intrat in divImp cu x=" + x +
+		 		" si y="+ y);
+		}
+		if(x==y) return;
+		int middle = (x+y)/2;
+		i=x; j=middle+1; p=0;
+		divetimp(x, middle);
+		divetimp(j, y);
+		while(i<middle || j<y)
+		{
+			if(array[i] > 2*array[j] && j<y || i>middle)
+			{
+				hashInv.put(array[i], array[j]);
+				System.out.print("\nAm gasit si adaugat inversiunea"+
+					array[i] + ">2*" +array[j]);
+			}
+		}
+	}
+
+	public static void printResults()
+	{
+		System.out.print("\n!\n!\n!Result:"+hashInv.toString()
+			+"\n!\n!\n!");
 	}
 
 	public static void main(String[] args)
@@ -21,24 +53,15 @@ class Inversiune
 			Scanner sc = new Scanner(file);
 			nArrayLimit = sc.nextInt();
 			init();
-			int i = 0;
+		    i = 0;
 			while(sc.hasNextInt() && i<nArrayLimit)
 			{
 				array[i] = sc.nextInt();
 				i++;
 			}
-			if(sc.hasNextInt() && i>=nArrayLimit)
-			{
-				throw new Exception("\nFisier intrare gresit!\n"+
-				 	"Elemente in plus, necitite!\n");
-			}
 
-			System.out.print("\nArray-ul dupa citire:{");
-			for(i=0; i<nArrayLimit; i++)
-			{
-				System.out.print(array[i] + " ");
-			}
-			System.out.print("}");
+			divetimp(0, nArrayLimit);
+			printResults();
 		}
 		catch (InputMismatchException e) 
   		{
